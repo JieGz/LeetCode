@@ -37,41 +37,30 @@ public class Solution {
 	public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 		ListNode head = new ListNode();
 		ListNode tail = head;
-		boolean addOne = false;
+		int carry = 0;
 		while (l1 != null || l2 != null) {
-			if (l1 == null) {
-				tail.val += l2.val;
-				l2 = l2.next;
-			} else if (l2 == null) {
-				tail.val += l1.val;
+			int n1 = l1 != null ? l1.val : 0;
+			int n2 = l2 != null ? l2.val : 0;
+			int val = n1 + n2 + carry;
+			tail.val = val % 10;
+			carry = val / 10;
+			if (l1 != null) {
 				l1 = l1.next;
-			} else {
-				tail.val += l1.val + l2.val;
-				l1 = l1.next;
+			}
+			if (l2 != null) {
 				l2 = l2.next;
 			}
-
-			if (tail.val > 9) {
-				tail.val = tail.val - 10;
-				addOne = true;
-			}
-
-			if (l1 != null || l2 != null || addOne) {
-				ListNode tmp = new ListNode(0);
-				if (addOne) {
-					tmp.val = 1;
-					addOne = false;
-				}
-				tail.next = tmp;
-				tail = tmp;
+			if (l1 != null || l2 != null || carry > 0) {
+				tail.next = new ListNode(carry);
+				tail = tail.next;
 			}
 		}
 		return head;
 	}
 
 	public static void main(String[] args) {
-		int[] l1Arr = new int[]{9, 9, 9, 9, 9};
-		int[] l2Arr = new int[]{9, 9, 9};
+		int[] l1Arr = new int[]{3, 5, 4};
+		int[] l2Arr = new int[]{6, 5, 7};
 
 		final ListNode l1 = produce(l1Arr);
 		final ListNode l2 = produce(l2Arr);
