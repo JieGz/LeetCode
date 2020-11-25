@@ -1,4 +1,4 @@
-package com.learn.lru;
+package com.learn.lru.v1;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
