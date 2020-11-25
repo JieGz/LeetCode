@@ -50,5 +50,6 @@ public class Solution {
         final ListNode list = solution.produce(arr);
         solution.print(list);
         solution.print(solution.reverseList(list));
+        solution.print(list);
     }
 }
