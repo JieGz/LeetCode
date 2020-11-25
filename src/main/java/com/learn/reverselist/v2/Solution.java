@@ -44,12 +44,51 @@ public class Solution {
         return prev;
     }
 
+    private ListNode reverseList(ListNode head, int m, int n) {
+        ListNode prev = null;
+        ListNode curr = head;
+        while (m > 1) {
+            prev = curr;
+            curr = curr.next;
+            --m;
+            --n;
+        }
+
+        ListNode con = prev;
+        ListNode tail = curr;
+
+        while (n > 0) {
+            final ListNode nextTemp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextTemp;
+            --n;
+        }
+
+        if (con != null) {
+            con.next = prev;
+        } else {
+            head = prev;
+        }
+
+        tail.next = curr;
+
+        return head;
+    }
+
+
     public static void main(String[] args) {
         final Solution solution = new Solution();
-        int[] arr = new int[]{1, 2, 3, 4, 5};
+        int[] arr = new int[]{1, 2, };
+        System.out.println(System.currentTimeMillis());
         final ListNode list = solution.produce(arr);
         solution.print(list);
-        solution.print(solution.reverseList(list));
-        solution.print(list);
+        System.out.println(System.currentTimeMillis());
+        solution.print(solution.reverseList(list, 1, 1));
+        System.out.println(System.currentTimeMillis());
+        // solution.print(solution.reverseList(list));
+        // solution.print(list);
+
+
     }
 }
