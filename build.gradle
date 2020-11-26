@@ -6,6 +6,8 @@ group 'com.learn'
 version '20201122'
 
 repositories {
+    mavenLocal()
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
     mavenCentral()
 }
 
