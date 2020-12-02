@@ -1,5 +1,6 @@
 package com.learn.kmp.v2;
 
+//还有KMP,BM,Sunday算法,效率一个比一个高
 public class Solution {
     public static void main(String[] args) {
         String mainStr = "ABC ABCDABCD";
