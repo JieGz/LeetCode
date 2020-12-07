@@ -2,61 +2,48 @@ package com.demo;
 
 public class Solution {
 
-    /**
-     * 寻找第k大元素
-     * @param array 待调整的数组
-     * @param k 第几大
-     * @return
-     */
-    public static int findNumberK(int[] array, int k) {
-        //1.用前k个元素构建小顶堆
-        buildHeap(array, k);
-        //2.继续遍历数组，和堆顶比较
-        for (int i = k; i < array.length; i++) {
-            if(array[i] > array[0]) {
-                array[0] = array[i];
-                downAdjust(array, 0, k);
-            }
-        }
-        //3.返回堆顶元素
-        return array[0];
-    }
+	/**
+	 * 使用快速排序法
+	 *
+	 * @param arr   未排序的数组
+	 * @param start 排序的启始位置
+	 * @param end   排序的终点位置
+	 * @param k     第k个位置
+	 * @return 第k大的元素
+	 */
+	public static int quickSort(int[] arr, int start, int end, int k) {
+		if (start < end) {
+			//把数组中的第0个数字作为标准数
+			int begin = arr[start];
+			//记录需要排序的下标
+			int low = start;
+			int high = end;
+			//循环找比标准数大的数和比标准数小的数
+			while (low < high) {
+				//右边的数字比标准数大
+				while (low < high && begin <= arr[high]) {
+					high--;
+				}
+				//使用右边的数字替换左边的数
+				arr[low] = arr[high];
+				//如果左边的数字比标准数小
+				while (low < high && arr[low] <= begin) {
+					low++;
+				}
+				arr[high] = arr[low];
+			}
+			//把标准数赋给low所在的位置的元素
+			arr[low] = begin;
+			//处理所有的小的数字
+			quickSort(arr, start, low, k);
+			//处理所有的大的数字
+			quickSort(arr, low + 1, end, k);
+		}
+		return arr[arr.length - k];
+	}
 
-    private static void buildHeap(int[] array, int length) {
-        //从最后一个非叶子节点开始，依次下沉调整
-        for (int i = (length - 2) / 2; i >= 0; i--) {
-            downAdjust(array, i, length);
-        }
-    }
-
-    /**
-     * 下沉调整
-     * @param array 待调整的堆
-     * @param index 要下沉的节点
-     * @param length 堆的有效大小
-     */
-    private static void downAdjust(int[] array, int index, int length) {
-        //temp保存父节点的值，用于最后的赋值
-        int temp = array[index];
-        int childIndex = 2 * index + 1;
-        while (childIndex < length) {
-            //如果有右孩子，且右孩子小于左孩子的值，则定位到右孩子
-            if (childIndex + 1 < length && array[childIndex + 1] < array[childIndex]) {
-                childIndex++;
-            }
-            //如果父节点小于任何一个孩子的值，直接跳出
-            if (temp <= array[childIndex])
-                break;
-            //无需真正交换，单项赋值即可
-            array[index] = array[childIndex];
-            index = childIndex;
-            childIndex = 2 * childIndex + 1;
-        }
-        array[index] = temp;
-    }
-
-    public static void main(String[] args) {
-        int[] array = new int[] {1,5,9,15,68,5,66,98,100};
-        System.out.println(findNumberK(array, 5));
-    }
+	public static void main(String... args) {
+		int[] arr = new int[]{2, 6, 5, 3, 6, 8, 1, 9, 9, 9, 89};
+		System.out.println(quickSort(arr, 0, arr.length - 1, 3));
+	}
 }
