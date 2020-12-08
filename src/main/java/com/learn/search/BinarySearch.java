@@ -46,15 +46,33 @@ public class BinarySearch {
 		return -1;
 	}
 
+	private int binarySearch(int[] arr, int target) {
+		int min = 0;
+		int max = arr.length - 1;
+		while (min <= max) {
+			int mid = (min + max) >> 1;
+			int midNumber = arr[mid];
+			if (midNumber == target) {
+				return mid;
+			} else if (midNumber < target) {
+				min = mid + 1;
+			} else {
+				max = mid - 1;
+			}
+		}
+		return -1;
+	}
+
 	private int sortAndSearch(int[] arr, int target) {
 		int[] sortArr = quickSort(arr, 0, arr.length - 1);
 		System.out.println(Arrays.toString(sortArr));
-		return binarySearch(sortArr, 0, sortArr.length - 1, target);
+		//return binarySearch(sortArr, 0, sortArr.length - 1, target);
+		return binarySearch(sortArr, target);
 	}
 
 	public static void main(String[] args) {
 		int[] arr = new int[]{4, 2, 5, 7, 3, 1, 8, 9, 3};
 		BinarySearch search = new BinarySearch();
-		System.out.println(search.sortAndSearch(arr, 70));
+		System.out.println(search.sortAndSearch(arr, 9));
 	}
 }
