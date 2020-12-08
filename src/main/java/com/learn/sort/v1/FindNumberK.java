@@ -27,11 +27,11 @@ public class FindNumberK {
 	private int[] quickSort(int[] arr, int start, int end) {
 		if (start < end) {
 			//标准数pivot在元素中的位置
-			int j = partition(arr, start, end);
+			int pivotIndex = partition(arr, start, end);
 			//排序左子数组
-			quickSort(arr, start, j - 1);
+			quickSort(arr, start, pivotIndex - 1);
 			//排序右子数组
-			quickSort(arr, j + 1, end);
+			quickSort(arr, pivotIndex + 1, end);
 		}
 		return arr;
 	}
@@ -47,6 +47,7 @@ public class FindNumberK {
 	private int partition(int[] arr, int left, int right) {
 		//将未排序的数组的第一个元素作为标准数
 		int pivot = arr[left];
+		//循环找比标准数大的数和比标准数小的数
 		while (left < right) {
 			//将右边比pivot小的数放到数组的左边
 			while (left < right && arr[right] >= pivot) {
