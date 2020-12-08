@@ -10,7 +10,9 @@ public class FindNumberK {
 	 * @return 第k大的元素
 	 */
 	private int findNumberK(int[] arr, int k) {
+		//使用快速排序对数组进行排序
 		int[] sortArr = quickSort(arr, 0, arr.length - 1);
+		//返回第k大的元素
 		return sortArr[sortArr.length - k];
 	}
 
