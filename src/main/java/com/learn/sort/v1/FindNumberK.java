@@ -11,9 +11,9 @@ public class FindNumberK {
 	 */
 	private int findNumberK(int[] arr, int k) {
 		//使用快速排序对数组进行排序
-		int[] sortArr = quickSort(arr, 0, arr.length - 1);
+		quickSort(arr, 0, arr.length - 1);
 		//返回第k大的元素
-		return sortArr[sortArr.length - k];
+		return arr[arr.length - k];
 	}
 
 	/**
@@ -22,9 +22,8 @@ public class FindNumberK {
 	 * @param arr   未排序的数组
 	 * @param start 排序的起始位置
 	 * @param end   排序的终点位置
-	 * @return 排好序的数组
 	 */
-	private int[] quickSort(int[] arr, int start, int end) {
+	private void quickSort(int[] arr, int start, int end) {
 		if (start < end) {
 			//标准数pivot在元素中的位置
 			int pivotIndex = partition(arr, start, end);
@@ -33,7 +32,6 @@ public class FindNumberK {
 			//排序右子数组
 			quickSort(arr, pivotIndex + 1, end);
 		}
-		return arr;
 	}
 
 	/**
@@ -67,6 +65,6 @@ public class FindNumberK {
 
 	public static void main(String[] args) {
 		int[] arr = new int[]{3, 1, 4, 5, 7, 2, 8, 2, 7};
-		System.out.println(new FindNumberK().findNumberK(arr, 2));
+		System.out.println(new FindNumberK().findNumberK(arr, 1));
 	}
 }
