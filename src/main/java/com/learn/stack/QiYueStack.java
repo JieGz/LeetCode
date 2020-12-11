@@ -1,5 +1,5 @@
 package com.learn.stack;
-
+//时间复杂度
 public class QiYueStack {
 	private String[] elements;
 	private int size;
